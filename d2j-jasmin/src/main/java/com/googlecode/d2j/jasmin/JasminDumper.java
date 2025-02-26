@@ -33,11 +33,24 @@ import org.objectweb.asm2.Label;
 import org.objectweb.asm2.MethodVisitor;
 import org.objectweb.asm2.Opcodes;
 import org.objectweb.asm2.Type;
-import org.objectweb.asm2.tree.*;
+import org.objectweb.asm2.tree.AbstractInsnNode;
+import org.objectweb.asm2.tree.AnnotationNode;
+import org.objectweb.asm2.tree.ClassNode;
+import org.objectweb.asm2.tree.FieldNode;
+import org.objectweb.asm2.tree.InnerClassNode;
+import org.objectweb.asm2.tree.LabelNode;
+import org.objectweb.asm2.tree.LocalVariableNode;
+import org.objectweb.asm2.tree.MethodNode;
+import org.objectweb.asm2.tree.TryCatchBlockNode;
 import org.objectweb.asm2.util.Printer;
 
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <b>get from asm example</b>
@@ -742,7 +755,7 @@ public class JasminDumper implements Opcodes {
             pw.print("[C = ");
             char[] v = (char[]) value;
             for (char element : v) {
-                pw.print(new Integer(element));
+                pw.print(Integer.valueOf(element));
                 pw.print(' ');
             }
             pw.println();
@@ -766,7 +779,7 @@ public class JasminDumper implements Opcodes {
             pw.print("[F = ");
             float[] v = (float[]) value;
             for (float element : v) {
-                print(new Float(element));
+                print(Float.valueOf(element));
                 pw.print(' ');
             }
             pw.println();
@@ -774,7 +787,7 @@ public class JasminDumper implements Opcodes {
             pw.print("[D = ");
             double[] v = (double[]) value;
             for (double element : v) {
-                print(new Double(element));
+                print(Double.valueOf(element));
                 pw.print(' ');
             }
             pw.println();
@@ -832,7 +845,7 @@ public class JasminDumper implements Opcodes {
             pw.println(((Boolean) value).booleanValue() ? 1 : 0);
         } else if (value instanceof Character) {
             pw.print("C = ");
-            pw.println(new Integer(((Character) value).charValue()));
+            pw.println(Integer.valueOf(((Character) value).charValue()));
         } else if (value instanceof Short) {
             pw.print("S = ");
             pw.println(((Short) value).intValue());
@@ -872,7 +885,7 @@ public class JasminDumper implements Opcodes {
         } else if (value instanceof Boolean) {
             pw.print(((Boolean) value).booleanValue() ? 1 : 0);
         } else if (value instanceof Character) {
-            pw.print(new Integer(((Character) value).charValue()));
+            pw.print(Integer.valueOf(((Character) value).charValue()));
         } else if (value instanceof Short) {
             pw.print(((Short) value).intValue());
         } else if (value instanceof Type) {

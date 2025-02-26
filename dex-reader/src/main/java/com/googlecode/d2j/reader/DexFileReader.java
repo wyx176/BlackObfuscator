@@ -15,19 +15,49 @@
  */
 package com.googlecode.d2j.reader;
 
-import java.io.*;
+import static com.googlecode.d2j.DexConstants.DEX_035;
+import static com.googlecode.d2j.DexConstants.DEX_037;
+
+import com.googlecode.d2j.DexConstants;
+import com.googlecode.d2j.DexException;
+import com.googlecode.d2j.DexLabel;
+import com.googlecode.d2j.DexType;
+import com.googlecode.d2j.Field;
+import com.googlecode.d2j.Method;
+import com.googlecode.d2j.MethodHandle;
+import com.googlecode.d2j.Proto;
+import com.googlecode.d2j.Visibility;
+import com.googlecode.d2j.node.DexAnnotationNode;
+import com.googlecode.d2j.util.Mutf8;
+import com.googlecode.d2j.visitors.DexAnnotationAble;
+import com.googlecode.d2j.visitors.DexClassVisitor;
+import com.googlecode.d2j.visitors.DexCodeVisitor;
+import com.googlecode.d2j.visitors.DexDebugVisitor;
+import com.googlecode.d2j.visitors.DexFieldVisitor;
+import com.googlecode.d2j.visitors.DexFileVisitor;
+import com.googlecode.d2j.visitors.DexMethodVisitor;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UTFDataFormatException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-
-import com.googlecode.d2j.*;
-import com.googlecode.d2j.node.DexAnnotationNode;
-import com.googlecode.d2j.util.Mutf8;
-import com.googlecode.d2j.visitors.*;
-
-import static com.googlecode.d2j.DexConstants.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * Open and read a dex file.this is the entrance of dex-reader. to read a dex/odex, use the following code:
@@ -681,19 +711,19 @@ public class DexFileReader implements BaseDexFileReader {
         int type = b & 0x1f;
         switch (type) {
         case VALUE_BYTE:
-            return new Byte((byte) readIntBits(in, b));
+            return Byte.valueOf((byte) readIntBits(in, b));
 
         case VALUE_SHORT:
-            return new Short((short) readIntBits(in, b));
+            return Short.valueOf((short) readIntBits(in, b));
 
         case VALUE_CHAR:
-            return new Character((char) readUIntBits(in, b));
+            return Character.valueOf((char) readUIntBits(in, b));
 
         case VALUE_INT:
-            return new Integer((int) readIntBits(in, b));
+            return Integer.valueOf((int) readIntBits(in, b));
 
         case VALUE_LONG:
-            return new Long(readIntBits(in, b));
+            return Long.valueOf(readIntBits(in, b));
 
         case VALUE_FLOAT:
             return Float.intBitsToFloat((int) (readFloatBits(in, b) >> 32));
@@ -733,7 +763,7 @@ public class DexFileReader implements BaseDexFileReader {
         case VALUE_NULL:
             return null;
         case VALUE_BOOLEAN: {
-            return new Boolean(((b >> 5) & 0x3) != 0);
+            return Boolean.valueOf(((b >> 5) & 0x3) != 0);
         }
         default:
             throw new DexException("Not support yet.");
