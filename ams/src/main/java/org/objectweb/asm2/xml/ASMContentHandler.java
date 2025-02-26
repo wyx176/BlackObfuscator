@@ -513,27 +513,27 @@ public class ASMContentHandler extends DefaultHandler implements Opcodes {
                         || "I".equals(desc) || "S".equals(desc)
                         || "B".equals(desc) || "C".equals(desc)
                         || "Z".equals(desc)) {
-                    value = new Integer(val);
+                    value = Integer.valueOf(val);
 
                 } else if ("Ljava/lang/Short;".equals(desc)) {
-                    value = new Short(val);
+                    value = Short.valueOf(val);
 
                 } else if ("Ljava/lang/Byte;".equals(desc)) {
-                    value = new Byte(val);
+                    value = Byte.valueOf(val);
 
                 } else if ("Ljava/lang/Character;".equals(desc)) {
-                    value = new Character(decode(val).charAt(0));
+                    value = Character.valueOf(decode(val).charAt(0));
 
                 } else if ("Ljava/lang/Boolean;".equals(desc)) {
                     value = Boolean.valueOf(val);
 
                 } else if ("Ljava/lang/Long;".equals(desc) || "J".equals(desc)) {
-                    value = new Long(val);
+                    value = Long.valueOf(val);
                 } else if ("Ljava/lang/Float;".equals(desc) || "F".equals(desc)) {
-                    value = new Float(val);
+                    value =  Float.valueOf(val);
                 } else if ("Ljava/lang/Double;".equals(desc)
                         || "D".equals(desc)) {
-                    value = new Double(val);
+                    value = Double.valueOf(val);
                 } else if (Type.getDescriptor(Type.class).equals(desc)) {
                     value = Type.getType(val);
 

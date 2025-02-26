@@ -70,6 +70,7 @@ public class DexLib2Utils {
 
 			for (DexBackedClassDef def : defs) {
 				String className = def.getType();
+				//System.out.println(className);
 				if (whiteListTree.search(className) && !blackListTree.search(className)) {
 					allowList.add(className);
 					Smali.assembleSmaliFile(classToSmali(def), dexBuilder, new SmaliOptions());

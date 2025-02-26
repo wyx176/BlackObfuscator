@@ -20,16 +20,17 @@ import com.android.dex.util.FileUtils;
 import com.googlecode.d2j.dex.Dex2jar;
 import com.googlecode.d2j.reader.DexFileReader;
 import com.googlecode.dex2jar.ir.ET;
+
 import org.jf.DexLib2Utils;
-import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import top.niunaijun.obfuscator.ObfuscatorConfiguration;
 
 @BaseCmd.Syntax(cmd = "d2j-black-obfuscator", syntax = "[options] <file0> [file1 ... fileN]", desc = "convert dex to jar")
 public class BlackObfuscatorCmd extends BaseCmd {

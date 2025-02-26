@@ -465,7 +465,7 @@ public class DexBackedClassDef extends BaseTypeReference implements ClassDef {
             if (!classAnnotations.isEmpty()) {
                 size += 4; //uint for size
                 size += classAnnotations.size() * 4; //uint per annotation_off
-                //TODO: should we add annotation_item size? what if it's shared?
+                //TODO: should we add annotation_item  size? what if it's shared?
             }
         }
 

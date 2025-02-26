@@ -195,7 +195,7 @@ public class FlowObfuscator extends BaseObfuscatorChain {
 		if (stmt.st == Stmt.ST.VOID_INVOKE) {
 			Stmt.E1Stmt e1Stmt = (Stmt.E1Stmt) stmt;
 			InvokeExpr expr = (InvokeExpr) e1Stmt.getOp();
-			return "<init>".equals(expr.method.getName());
+			return "<init>".equals(expr.getName());
 		}
 		return false;
 	}
